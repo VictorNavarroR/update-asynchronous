@@ -83,3 +83,48 @@ const deleteP = (e) => {
     e.parentNode.remove();
   }
 }
+
+//Iteration#2
+/* 2.1 Convierte la siguiente promesa para esperar a ejecutar el console usando 
+async-await. */
+
+const runTimeOut = async () => {
+  const promise = new Promise((resolve) => {
+      setTimeout(function () {
+          resolve();
+      }, 2000);
+  })
+
+  //promise.then(() => {console.log('Time out!')})
+  try {
+    await promise;
+    console.log('Time out!');
+  } catch (err) {
+    console.log(err);
+  }
+  
+
+};
+
+runTimeOut();
+
+/*  2.2 Convierte la siguiente función con un fetch utilizando async-await. 
+Recuerda que para usar .fetch() tendrás que probar el ejercicio en el navegador; */
+
+/* function getCharacters () {
+  fetch('https://rickandmortyapi.com/api/character').then(res => res.json()).then(characters => console.log(characters));
+} */
+
+async function getCharacters () {
+  try{
+    const result = await fetch('https://rickandmortyapi.com/api/character');
+    const json = await result.json();
+    const characters = json.results;
+    console.log(characters)
+  } catch(err) {
+    console.log(err);
+  }
+  
+}
+
+getCharacters();
